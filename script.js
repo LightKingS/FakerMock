@@ -17,7 +17,7 @@ function geraDados(quantidade){
         datas.push(obj)
     }
 }
-geraDados(1000)
+geraDados(100)
 
 function procuraNome(inicial){
     return datas.filter((value) => value.nome.startsWith(inicial))
@@ -28,39 +28,19 @@ function retornaClientes(){
 }
 
 function contaNome(inicial){
-    let x = datas.filter((value) => value.nome.startsWith(inicial))
-    let contagem = 0
-    for (i=0;i<x.length;i++){
-        contagem++
-    }
-    return contagem
+    return datas.filter((cliente) => cliente.nome.startsWith(inicial)).reduce((acc, value) => (acc += 1), 0)
 }
 
 function retornaNomesCompletos(){
-    let nomes = []
-    for (let i=0; i<datas.length;i++){
-        nomes.push(datas[i].nome)
-    }
-    return nomes
+    return datas.map((cliente) => cliente.nome)
 }
 
 function retornaNomes(){
-    let nomes = []
-    for (let i=0; i<datas.length;i++){
-        let x = datas[i].nome.split(' ')
-        nomes.push(x[0])
-    }
-    return nomes
+    return datas.map((cliente) => cliente.nome.split(" ")[0])
 }
 
 function retornaNomesPorInicial(inicial){
-    let nomes = []
-    let dados = datas.filter((value) => value.nome.startsWith(inicial))
-    for (let i=0; i<dados.length;i++){
-        let x = dados[i].nome.split(' ')
-        nomes.push(x[0])
-    }
-    return nomes
+    return dados = datas.filter((value) => value.nome.startsWith(inicial)).map((cliente) => cliente.nome.split(" ")[0])
 }
 
 function getAge(dateString) {
@@ -75,16 +55,7 @@ function getAge(dateString) {
 }
 
 function retornaMaioresDeIdade(){
-    let maioresDeIdade = []
-    for (i=0;i<datas.length;i++){
-
-        let nascimento = datas[i].nascimento
-
-        if (getAge(nascimento) > 18){
-            maioresDeIdade.push(datas[i])
-        }
-    }
-    return maioresDeIdade
+    return datas.filter((value) => getAge(value.nascimento) > 18)
 }
 
 function retornaSeContemNome(nome){
@@ -96,54 +67,36 @@ function retornaSeContemNome(nome){
 }
 
 function totalDeVendas(){
-    totalCompras = 0
-    for(i=0;i<datas.length;i++){
-        totalCompras = totalCompras + datas[i].contaCompras
-    }
-    return totalCompras
+    return datas.reduce((count, datas) => count + datas.contaCompras, 0)
 }
 
 function retornaClientesSemComprar(){
-    clientes = []
-    for(i=0;i<datas.length;i++){
-        
-        if(getAge(datas[i].ultimaCompra) > 1){
-            clientes.push(datas[i])
-        }
-    }
-    return clientes
+    return datas.filter((clientes) => getAge(clientes.ultimaCompra) > 1)
 }
 
 function retornaClientes15Compras(){
-    clientes = []
-    for(i=0;i<datas.length;i++){
-        
-        if(datas[i].contaCompras > 15){
-            clientes.push(datas[i])
-        }
-    }
-    return clientes
+    return datas.filter((clientes) => clientes.contaCompras > 15)
 }
 
 
-console.log(procuraNome('A'))
+//console.log(procuraNome('A'))
 
-console.log(retornaClientes())
+//console.log(retornaClientes())
 
-console.log(contaNome('A'))
+//console.log(contaNome('A'))
 
-console.log(retornaNomesCompletos())
+//console.log(retornaNomesCompletos())
 
-console.log(retornaNomes())
+//console.log(retornaNomes())
 
-console.log(retornaNomesPorInicial('A'))
+//console.log(retornaNomesPorInicial('A'))
 
-console.log(retornaMaioresDeIdade())
+//console.log(retornaMaioresDeIdade())
 
-console.log(retornaSeContemNome("André"))
+//console.log(retornaSeContemNome("André"))
 
-console.log(totalDeVendas())
+//console.log(totalDeVendas())
 
-console.log(retornaClientesSemComprar())
+//console.log(retornaClientesSemComprar())
 
-console.log(retornaClientes15Compras())
+//console.log(retornaClientes15Compras())
